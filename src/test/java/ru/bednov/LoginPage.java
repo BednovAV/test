@@ -17,6 +17,9 @@ public class LoginPage
     @FindBy(xpath = "//*[@id=\"content\"]/div/form/fieldset/div[2]/div/input")
     private WebElement passwdField;
 
+    @FindBy(xpath = "//*[@id=\"captcha_login\"]")
+    private WebElement captchaField;
+
     public WebDriver driver;
     public LoginPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -35,6 +38,11 @@ public class LoginPage
     public void clickLoginBtn()
     {
         loginBtn.click();
+    }
+
+    public void selectCaptcha()
+    {
+        captchaField.click();
     }
 
 
