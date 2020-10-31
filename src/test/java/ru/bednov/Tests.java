@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.io.Console;
 import java.util.concurrent.TimeUnit;
 
 public class Tests {
