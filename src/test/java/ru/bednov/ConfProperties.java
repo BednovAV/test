@@ -2,7 +2,10 @@ package ru.bednov;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Properties;
+import java.nio.charset.Charset;
+
 public class ConfProperties {
     protected static FileInputStream fileInputStream;
     protected static Properties PROPERTIES;
@@ -12,7 +15,7 @@ public class ConfProperties {
             //указание пути до файла с настройками
             fileInputStream = new FileInputStream("src/test/resources/conf.properties");
             PROPERTIES = new Properties();
-            PROPERTIES.load(fileInputStream);
+            PROPERTIES.load(new InputStreamReader(fileInputStream, Charset.forName("UTF-8")));
         } catch (IOException e) {
             e.printStackTrace();
             //обработка возможного исключения (нет файла и т.п.)

@@ -6,12 +6,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import ru.bednov.Pages.MainPage;
 
 import java.util.concurrent.TimeUnit;
 
-public class Tests {
+public class LoginTest {
 
-    public static LoginPage loginPage;
     public static MainPage mainPage;
     public static WebDriver driver;
 
@@ -21,7 +21,6 @@ public class Tests {
         System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromedriver"));
 
         driver = new ChromeDriver();
-        loginPage = new LoginPage(driver);
         mainPage = new MainPage(driver);
 
         driver.manage().window().maximize();
@@ -34,23 +33,16 @@ public class Tests {
     @Test
     public void loginTest() throws InterruptedException
     {
-        //вводим логин
-        loginPage.inputLogin(ConfProperties.getProperty("login"));
-        //нажимаем кнопку входа
-        //loginPage.clickLoginBtn();
-        //вводим пароль
-        loginPage.inputPasswd(ConfProperties.getProperty("password"));
-
-        // вводим капчу(вручную)
-        loginPage.selectCaptcha();
+        // первое нажатие войти
+        mainPage.FirstLoginBtn();
+        //ввод логина
+        mainPage.inputLogin(ConfProperties.getProperty("login"));
+        mainPage.inputPass(ConfProperties.getProperty("password"));
+        //mainPage.clickCaptha();
         Thread.sleep(10000);
-
-        //нажимаем кнопку входа
-        loginPage.clickLoginBtn();
-
-        String username = mainPage.getUsername();
-
-        Assert.assertEquals(username, "Андрей");
+        mainPage.SecondLoginBtn();
+        String user = mainPage.getUserName();
+        Assert.assertEquals(ConfProperties.getProperty("name"), user);
        }
 
     @AfterClass
